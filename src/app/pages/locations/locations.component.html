@@ -1,0 +1,101 @@
+<app-nav />
+
+<!-- Hero -->
+<header class="loc-hero">
+  <div class="loc-hero-text">
+    <div class="sec-label"><span class="sec-num">04 —</span> Locations</div>
+    <h1 appReveal>Find us.</h1>
+    <p class="hero-sub" appReveal>One place, done right. More soon.</p>
+  </div>
+  <div class="loc-coords" aria-hidden="true" appReveal>
+    <span>23.5859° N</span>
+    <span>58.4059° E</span>
+  </div>
+</header>
+
+<!-- Main location -->
+<section id="qurum" class="loc-main">
+  <div class="loc-grid">
+
+    <!-- Map placeholder / pin visual -->
+    <div class="map-wrap" appReveal>
+      <div class="map-inner">
+        <svg class="map-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="400" height="400" fill="#ede8d8"/>
+          <!-- Street grid -->
+          <line x1="0" y1="200" x2="400" y2="200" stroke="#d4cdb8" stroke-width="8"/>
+          <line x1="200" y1="0" x2="200" y2="400" stroke="#d4cdb8" stroke-width="8"/>
+          <line x1="0" y1="120" x2="400" y2="120" stroke="#d4cdb8" stroke-width="4"/>
+          <line x1="0" y1="280" x2="400" y2="280" stroke="#d4cdb8" stroke-width="4"/>
+          <line x1="120" y1="0" x2="120" y2="400" stroke="#d4cdb8" stroke-width="4"/>
+          <line x1="280" y1="0" x2="280" y2="400" stroke="#d4cdb8" stroke-width="4"/>
+          <!-- Blocks -->
+          <rect x="130" y="130" width="60" height="60" fill="#cdc78a" opacity=".3"/>
+          <rect x="210" y="130" width="60" height="60" fill="#cdc78a" opacity=".3"/>
+          <rect x="130" y="210" width="60" height="60" fill="#cdc78a" opacity=".3"/>
+          <rect x="210" y="210" width="60" height="60" fill="#cdc78a" opacity=".3"/>
+        </svg>
+        <!-- Animated pin -->
+        <div class="map-pin" aria-label="Levels Café location">
+          <svg width="32" height="44" viewBox="0 0 32 44" fill="none">
+            <path d="M16 0C7.163 0 0 7.163 0 16c0 10 16 28 16 28S32 26 32 16C32 7.163 24.837 0 16 0z" fill="var(--accent)"/>
+            <circle cx="16" cy="16" r="6" fill="#fff"/>
+          </svg>
+          <div class="pin-pulse"></div>
+        </div>
+        <div class="map-label">Qurum, Muscat</div>
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="loc-details">
+      <div class="loc-block" appReveal id="hours">
+        <h2>Qurum</h2>
+        <p class="loc-address">
+          Way 3044, Qurum District<br/>
+          Muscat, Sultanate of Oman<br/>
+          <a href="https://maps.google.com/?q=Qurum+Muscat" target="_blank" rel="noopener">Open in Maps →</a>
+        </p>
+      </div>
+
+      <div class="hours-wrap" appReveal id="hours">
+        <h3>Hours</h3>
+        <table class="hours-table">
+          @for (h of hours; track h.day) {
+            <tr [class.today]="h.day === today">
+              <td class="h-day">{{ h.day }}</td>
+              <td class="h-time">{{ h.open }} — {{ h.close }}</td>
+              @if (h.day === today) {
+                <td class="h-badge">Today</td>
+              } @else {
+                <td></td>
+              }
+            </tr>
+          }
+        </table>
+      </div>
+
+      <div class="loc-block" appReveal id="directions">
+        <h3>Getting here</h3>
+        <p>Street parking available on Way 3044 and the side streets. Fifteen minute walk from the Qurum Beach area.</p>
+        <p>Nearest landmark: Qurum Natural Park entrance, 200m north.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Coming soon -->
+<section class="coming">
+  <div class="sec-label"><span class="sec-num">—</span> Coming soon</div>
+  <div class="coming-grid">
+    @for (loc of coming; track loc.city) {
+      <div class="coming-card" appReveal>
+        <div class="coming-city">{{ loc.city }}</div>
+        <div class="coming-note">{{ loc.note }}</div>
+      </div>
+    }
+  </div>
+</section>
+
+<app-footer />

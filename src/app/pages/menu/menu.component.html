@@ -1,0 +1,80 @@
+<app-nav />
+
+<div class="menu-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sec-label" style="margin-bottom:28px"><span class="sec-num">02 —</span> Menu</div>
+      <div class="search-wrap">
+        <input
+          class="search"
+          type="search"
+          placeholder="Search…"
+          [value]="query()"
+          (input)="query.set($any($event.target).value)"
+          aria-label="Search menu" />
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="9.6" y1="9.6" x2="13" y2="13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <nav class="cat-nav" aria-label="Menu categories">
+        @for (cat of allCategories; track cat.id) {
+          <button
+            class="cat-btn"
+            [class.active]="activeCat() === cat.id"
+            (click)="scrollTo(cat.id)">
+            {{ cat.cat }}
+          </button>
+        }
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main list -->
+  <main class="menu-main">
+
+    <div class="page-head" style="padding-top:80px">
+      <h1>The Menu</h1>
+      <p>Sixty-something things, done well.</p>
+    </div>
+
+    @for (cat of filtered(); track cat.id) {
+      <section class="cat-section" [attr.data-id]="cat.id" [id]="'cat-' + cat.id">
+        <div class="cat-head" appReveal>
+          <span class="cat-num">—</span>
+          <h2>{{ cat.cat }}</h2>
+        </div>
+        <div class="items-grid">
+          @for (item of cat.items; track item.slug) {
+            <a class="item-row" [routerLink]="['/item', item.slug]" appReveal>
+              <div class="item-left">
+                <span class="item-n">{{ item.n }}</span>
+                <div>
+                  <div class="item-name">{{ item.name }}</div>
+                  <div class="item-desc">{{ item.desc }}</div>
+                </div>
+              </div>
+              <div class="item-right">
+                <span class="item-price">{{ item.price }}</span>
+                <span class="item-arrow">→</span>
+              </div>
+            </a>
+          }
+        </div>
+      </section>
+    }
+
+    @if (filtered().length === 0) {
+      <div class="no-results">
+        <p>Nothing matched "<strong>{{ query() }}</strong>"</p>
+        <button class="btn" (click)="query.set('')">Clear search</button>
+      </div>
+    }
+
+  </main>
+</div>
+
+<app-footer />

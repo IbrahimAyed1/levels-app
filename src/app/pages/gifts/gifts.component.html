@@ -1,0 +1,92 @@
+<app-nav />
+
+<!-- Hero -->
+<header class="gifts-hero">
+  <div class="gifts-hero-bg">
+    <img src="img/gift-hero.jpg" alt="" aria-hidden="true" />
+  </div>
+  <div class="gifts-hero-inner">
+    <div class="sec-label"><span class="sec-num">03 —</span> Gift Cards</div>
+    <h1 appReveal>
+      Give the gift of<br/>
+      <em>a coffee, considered.</em>
+    </h1>
+    <p class="hero-sub" appReveal>
+      Three tiers. Hand-stamped, paper-wrapped, given well.
+    </p>
+  </div>
+</header>
+
+<!-- Tiers -->
+<section>
+  <div class="sec-label"><span class="sec-num">—</span> Choose</div>
+  <div class="tiers">
+    @for (tier of tiers; track tier.id) {
+      <div
+        class="tier-card"
+        [class.active]="selected()?.id === tier.id"
+        (click)="select(tier)"
+        appReveal>
+        <div class="tier-img">
+          <img [src]="'img/gift-' + tier.id + '.jpg'" [alt]="tier.name" />
+        </div>
+        <div class="tier-tag">{{ tier.tag }}</div>
+        <div class="tier-price">{{ tier.price }} <span>OMR</span></div>
+        <h2 class="tier-name">{{ tier.name }}</h2>
+        <p class="tier-desc">{{ tier.desc }}</p>
+        <div class="tier-cta">
+          <span>{{ selected()?.id === tier.id ? 'Selected' : 'Select' }}</span>
+          <span class="arrow">{{ selected()?.id === tier.id ? '✓' : '→' }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Selector CTA -->
+@if (selected()) {
+  <div class="select-bar" appReveal>
+    @if (!confirmed()) {
+      <div class="select-bar-inner">
+        <div>
+          <span class="select-label">Selected:</span>
+          <strong>{{ selected()!.name }} — {{ selected()!.price }} OMR</strong>
+        </div>
+        <button class="btn" (click)="confirm()">
+          <span>Confirm selection</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    } @else {
+      <div class="select-bar-inner confirmed">
+        <span>Thank you — we'll be in touch shortly. 🌿</span>
+      </div>
+    }
+  </div>
+}
+
+<!-- How it works -->
+<section id="how">
+  <div class="sec-label"><span class="sec-num">—</span> How it works</div>
+  <div class="steps">
+    @for (step of steps; track step.n) {
+      <div class="step" appReveal>
+        <div class="step-n">{{ step.n }}</div>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Fine print -->
+<section class="fine">
+  <div class="fine-inner" appReveal>
+    <p>
+      Gift cards are redeemable at the Qurum location. No expiry. Not redeemable for cash.
+      For bulk orders (10+) email us at <a href="mailto:gifts@levelscafe.om">gifts&#64;levelscafe.om</a>.
+    </p>
+  </div>
+</section>
+
+<app-footer />

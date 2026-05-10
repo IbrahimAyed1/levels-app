@@ -1,0 +1,148 @@
+// ============================================================
+// Levels Café — Global Design System
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// ── Tokens ──────────────────────────────────────────────────
+:root {
+  --bg:       #f4f1ea;
+  --bg-tint:  #ece6d5;
+  --ink:      #1f1d18;
+  --ink-2:    #4a463d;
+  --ink-3:    #8a8478;
+  --rule:     #d8d2c4;
+  --accent:   #c8a45c;
+  --serif:    "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --sans:     "Inter", ui-sans-serif, system-ui, sans-serif;
+  --mono:     "JetBrains Mono", ui-monospace, monospace;
+  --hairline: 0.5px;
+  --pad-x:    clamp(24px, 6vw, 96px);
+  --nav-h:    64px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-circ: cubic-bezier(.6, .05, .2, 1);
+}
+
+// ── Reset ────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font: inherit; }
+::selection { background: var(--accent); color: #fff; }
+
+// ── Section ──────────────────────────────────────────────────
+section { padding: 120px var(--pad-x); position: relative; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 48px;
+
+  &::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+}
+
+.sec-num { color: var(--ink-2); }
+
+// ── Page header (inner pages) ─────────────────────────────────
+.page-head {
+  padding: 120px var(--pad-x) 80px;
+  border-bottom: var(--hairline) solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: end;
+
+  .crumb {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+
+    &::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+
+    a { color: var(--ink-3); transition: color .2s; &:hover { color: var(--ink); } }
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(56px, 9vw, 144px);
+    line-height: .95;
+    letter-spacing: -.025em;
+    margin: 0;
+    text-wrap: balance;
+    em { font-style: italic; color: var(--accent); }
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+// ── Button ────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 14px 0;
+  position: relative;
+  background: none;
+  border: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 8px;
+    height: 1px;
+    background: var(--ink-3);
+    transition: background .3s, height .3s;
+  }
+  &:hover::after { background: var(--accent); height: 1.5px; }
+
+  .arrow { transition: transform .3s; }
+  &:hover .arrow { transform: translateX(4px); }
+}
+
+// ── Reveal animation ──────────────────────────────────────────
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  &.in { opacity: 1; transform: none; }
+}

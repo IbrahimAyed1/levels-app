@@ -1,0 +1,17 @@
+<nav class="nav">
+  <a class="mark" routerLink="/">
+    <img src="levels-logo.webp" alt="Levels" />
+  </a>
+  <ul>
+    @for (l of links; track l.path) {
+      <li>
+        <a [routerLink]="l.path" routerLinkActive="on">{{ l.label }}</a>
+      </li>
+    }
+  </ul>
+  <div class="lang">
+    <span class="on">EN</span>
+    <span>/</span>
+    <span>AR</span>
+  </div>
+</nav>

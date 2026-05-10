@@ -1,0 +1,125 @@
+<app-nav />
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="hero-meta">
+    <div class="col">
+      <strong>Est. 2019</strong>
+      <span>Specialty coffee</span>
+      <span>Muscat, Oman</span>
+    </div>
+    <div class="col right">
+      <strong>23.5859° N</strong>
+      <span>58.4059° E</span>
+      <span>Open · 8:00 — 22:00</span>
+    </div>
+  </div>
+  <div class="wordmark">
+    <img class="wm-logo" src="levels-logo.webp" alt="Levels Café" />
+    <div class="tag">A coffee, considered</div>
+  </div>
+  <div class="hero-foot">
+    <div>Vol. 07 · Spring '26</div>
+    <div class="scroll">
+      <span>Scroll</span>
+      <span class="line"></span>
+    </div>
+    <div>№ 04 · Qurum</div>
+  </div>
+</header>
+
+<!-- About -->
+<section id="about">
+  <div class="sec-label"><span class="sec-num">01 —</span> About</div>
+  <div class="about">
+    <h2 class="about-h" appReveal>
+      We make coffee the way we'd<br/>
+      want it made <em>for us.</em>
+    </h2>
+    <div class="about-body" appReveal>
+      <p class="lede">
+        Levels began as a small bar on a quiet street in Qurum — a single
+        machine, a hand grinder, and a stubborn idea about what a flat white
+        should taste like.
+      </p>
+      <p>
+        Seven years on, the idea hasn't changed. We roast in small batches,
+        we don't chase trends, and we'd rather get one cup right than serve
+        a hundred we're not proud of. The room is quiet on purpose. The menu
+        is long because every item earns its place.
+      </p>
+      <p>
+        We work with five farms across Ethiopia, Kenya and Yemen. Beans are
+        roasted Tuesday, rested Wednesday, on the bar by Thursday — never
+        older than ten days when we serve them.
+      </p>
+      <div class="about-stats">
+        <div class="stat"><div class="n">7</div><div class="l">Years</div></div>
+        <div class="stat"><div class="n">5</div><div class="l">Farms</div></div>
+        <div class="stat"><div class="n">10d</div><div class="l">Max rest</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Browse cards -->
+<section class="cards-section">
+  <div class="sec-label"><span class="sec-num">—</span> Browse</div>
+  <div class="cards">
+    @for (c of cards; track c.n) {
+      <a class="card" [routerLink]="c.path" appReveal>
+        <div class="num">{{ c.n }} —</div>
+        <div class="deco">{{ c.deco }}</div>
+        <div>
+          <h3>{{ c.t }}</h3>
+          <p>{{ c.d }}</p>
+        </div>
+        <div class="cta">
+          <span>Open</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+    }
+  </div>
+</section>
+
+<!-- Family -->
+<section id="family" class="family">
+  <div class="family-wrap">
+    <div>
+      <div class="sec-label" style="margin-bottom:24px">
+        <span class="sec-num">05 —</span> The Levels Family
+      </div>
+      <h2 appReveal>More than regulars. <em>Family.</em></h2>
+      <p appReveal>
+        The Levels Family is for the people who treat us like a second
+        kitchen — who know the staff's names and bring their kids and
+        their grandparents and their first dates. Members get early
+        access to seasonal menus, invitations to tasting evenings, and
+        a monthly bag of beans calibrated to your palate. Interest list
+        opening soon — leave your email and we'll reach out.
+      </p>
+      <form class="family-form" appReveal (submit)="submit($event)">
+        <input type="email" placeholder="your@email"
+               [value]="email()"
+               (input)="email.set($any($event.target).value)"
+               [disabled]="sent()"
+               aria-label="Email" />
+        <button type="submit" class="btn" [disabled]="sent()">
+          <span>{{ sent() ? 'Added' : 'Notify me' }}</span>
+          <span class="arrow">→</span>
+        </button>
+      </form>
+    </div>
+    <div class="family-side" appReveal>
+      <div class="quote">
+        <span class="quote-mark">"</span>
+        We don't have customers. We have the same forty people, every
+        morning, for seven years.
+        <div class="attr">— Hamood, founder</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer />

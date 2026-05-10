@@ -1,0 +1,64 @@
+.site-footer {
+  padding: 80px var(--pad-x) 36px;
+  border-top: var(--hairline) solid var(--rule);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .brand {
+    img { height: 42px; width: auto; margin-bottom: 10px; }
+    small {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .18em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+  }
+
+  h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+
+    a:hover { color: var(--accent); }
+  }
+
+  .colophon {
+    grid-column: 1 / -1;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: var(--hairline) solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .16em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+}

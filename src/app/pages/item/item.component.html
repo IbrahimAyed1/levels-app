@@ -1,0 +1,68 @@
+<app-nav />
+
+@if (item(); as it) {
+
+  <!-- Back -->
+  <div class="back-row">
+    <a class="back-link" routerLink="/menu">← Menu</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="item-hero">
+    <div class="item-visual" appReveal [style.background]="letterColor(it.name)">
+      <span class="item-letter">{{ it.name[0] }}</span>
+      <div class="item-n-badge">{{ it.n }}</div>
+    </div>
+
+    <div class="item-info" appReveal>
+      <div class="item-cat">
+        <span class="sec-num">{{ it.n }} —</span> {{ it.cat }}
+      </div>
+      <h1>{{ it.name }}</h1>
+      <p class="item-desc">{{ it.desc }}</p>
+
+      <div class="item-price-row">
+        <span class="price-label">Price</span>
+        <span class="price-val">{{ it.price }} <span class="price-cur">OMR</span></span>
+      </div>
+
+      <div class="item-actions">
+        <a class="btn" routerLink="/menu">
+          <span>Back to menu</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  @if (related().length > 0) {
+    <section class="related">
+      <div class="sec-label"><span class="sec-num">—</span> You may also like</div>
+      <div class="related-grid">
+        @for (r of related(); track r.slug) {
+          <a class="related-card" [routerLink]="['/item', r.slug]" appReveal>
+            <div class="related-visual" [style.background]="letterColor(r.name)">
+              <span>{{ r.name[0] }}</span>
+            </div>
+            <div class="related-body">
+              <div class="related-cat">{{ r.cat }}</div>
+              <div class="related-name">{{ r.name }}</div>
+              <div class="related-price">{{ r.price }} OMR</div>
+            </div>
+          </a>
+        }
+      </div>
+    </section>
+  }
+
+} @else {
+
+  <div class="not-found">
+    <h1>Item not found.</h1>
+    <a class="btn" routerLink="/menu"><span>Browse the menu</span><span class="arrow">→</span></a>
+  </div>
+
+}
+
+<app-footer />
